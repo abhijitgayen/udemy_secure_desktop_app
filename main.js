@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron/main')
 const path = require('node:path')
+const { ipcMain } = require('electron');
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -28,3 +29,9 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+
+ipcMain.on('send-data', (event, arg) => {
+  console.log(arg); // Prints 'Hello from Renderer'
+  // Send a reply back to the renderer process
+  event.reply('get-data', 'Hello from Main');
+});

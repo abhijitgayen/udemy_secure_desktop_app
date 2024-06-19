@@ -12,5 +12,16 @@
         Chromium <span id="chrome-version"></span>,
         and Electron <span id="electron-version"></span>.
     </p>
+    <div>
+        <button id="btn">Click Me</button>
+    </div>
 </body>
+<script>
+    document.getElementById('btn').addEventListener('click', () => {
+        window?.electronAPI?.sendMessageFromMain('Send Message to Main Process')
+    })
+    window?.electronAPI?.getMessageFromMain((event , data) => {
+        console.log(data)
+    })
+</script>
 </html>
