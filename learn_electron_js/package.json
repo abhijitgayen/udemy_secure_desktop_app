@@ -1,13 +1,16 @@
 {
-  "name": "udemy_electron_js",
+  "name": "learn_electron_js",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "learn electronJs",
+    "Udemy course"
+  ],
+  "author": "Abhijit Gayen <agayen04@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "electron": "^31.0.1"
