@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Video Call & Chat UI</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script defer src="script.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Dynamic Side panel for multiple users -->
+            <div class="user-list" id="user-list">
+                <!-- Users will be dynamically populated here -->
+            </div>
+
+            <!-- Chat Section with a toggle button to switch between Chat and Video -->
+            <div class="main-content">
+                <div class="header">
+                    <button class="toggle-btn" id="toggle-call-chat">
+                        Video Call
+                    </button>
+                    <h2 id="current-user">Select a User</h2>
+                </div>
+
+                <!-- Chat and Video Call Wrapper (Default to Chat) -->
+                <div id="chat-container" class="chat-container">
+                    <!-- Chat Section -->
+                    <div class="chat">
+                        <div class="chat-body" id="chat-body">
+                            <!-- Messages will appear here -->
+                        </div>
+                        <div class="chat-footer">
+                            <input
+                                type="text"
+                                id="message-input"
+                                placeholder="Type a message"
+                            />
+                            <button id="send-btn">
+                                <svg
+                                    width="20px"
+                                    height="20px"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g id="style=fill">
+                                        <g id="message">
+                                            <path
+                                                id="Subtract"
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M22.5618 6.62281C23.5345 3.43985 20.5863 0.43971 17.3938 1.44593L17.3918 1.44656L4.13385 5.55475C0.321194 6.75095 0.276533 12.1486 4.07556 13.422L7.70072 14.6431L7.70334 14.644C8.48677 14.9047 9.10562 15.5095 9.36293 16.2972L9.36535 16.3045L10.5881 19.9219L10.5884 19.923C11.8679 23.7517 17.2516 23.6582 18.4449 19.8408L22.5618 6.62281ZM6.07438 11.4215C5.68183 11.2893 5.47081 10.8639 5.60304 10.4714C5.73527 10.0788 6.16068 9.86779 6.55322 10L10.1769 11.2207L10.1782 11.2211C10.5695 11.3515 10.9363 11.5378 11.2677 11.7723C11.4809 11.9232 11.6795 12.0941 11.8604 12.2829C12.2734 12.7139 12.5941 13.2376 12.7874 13.8276L14.0099 17.4441C14.1425 17.8365 13.9319 18.2622 13.5395 18.3948C13.1471 18.5274 12.7215 18.3169 12.5888 17.9245L11.3652 14.3045L11.3628 14.2972C11.241 13.9242 11.0389 13.5936 10.7774 13.3208C10.6629 13.2013 10.5369 13.0928 10.4011 12.9967C10.1898 12.8471 9.95495 12.7277 9.70325 12.6439L6.07438 11.4215Z"
+                                                fill="#000000"
+                                            />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Video Call Section -->
+                    <div class="video-call hidden">
+                        <video id="localVideo" autoplay muted></video>
+                        <div class="controls">
+                            <button class="control-btn" id="mute-btn">
+                                <svg
+                                    fill="#000000"
+                                    width="25px"
+                                    height="25px"
+                                    viewBox="0 0 24 24"
+                                    id="microphone"
+                                    data-name="Flat Color"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="icon flat-color"
+                                >
+                                    <path
+                                        id="secondary"
+                                        d="M12,22a1,1,0,0,1-1-1V17a1,1,0,0,1,2,0v4A1,1,0,0,1,12,22Z"
+                                        style="fill: rgb(44, 169, 188)"
+                                    ></path>
+                                    <path
+                                        id="primary"
+                                        d="M12,2A5,5,0,0,0,7,7v6a5,5,0,0,0,10,0V7A5,5,0,0,0,12,2Z"
+                                        style="fill: rgb(0, 0, 0)"
+                                    ></path>
+                                    <path
+                                        id="primary-2"
+                                        data-name="primary"
+                                        d="M15,22H9a1,1,0,0,1,0-2h6a1,1,0,0,1,0,2Z"
+                                        style="fill: rgb(0, 0, 0)"
+                                    ></path>
+                                </svg>
+                            </button>
+                            <button class="control-btn" id="video-btn">
+                                <svg
+                                    fill="#000000"
+                                    width="25px"
+                                    height="25px"
+                                    viewBox="0 0 256 256"
+                                    id="Flat"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M176,92v96a16.01833,16.01833,0,0,1-16,16H48A40.04584,40.04584,0,0,1,8,164V68A16.01833,16.01833,0,0,1,24,52H136A40.04584,40.04584,0,0,1,176,92Zm68.01562-18.91895a8.00341,8.00341,0,0,0-7.98437-.02734l-40,22.85742A8,8,0,0,0,192,102.85742v50.28516a8,8,0,0,0,4.03125,6.94629l40,22.85742A8.0003,8.0003,0,0,0,248,176V80A7.99807,7.99807,0,0,0,244.01562,73.08105Z"
+                                    />
+                                </svg>
+                            </button>
+                            <button
+                                class="control-btn end-call"
+                                id="end-call-btn"
+                            >
+                                <svg
+                                    width="25px"
+                                    height="25px"
+                                    viewBox="0 0 28 28"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M17.1519 16.2663L16.6145 13.848C16.4799 13.8132 16.3153 13.7736 16.1266 13.7339C15.5657 13.6158 14.8074 13.5 13.9999 13.5C13.1924 13.5 12.434 13.6158 11.8731 13.7339C11.6845 13.7736 11.5199 13.8132 11.3853 13.848L10.8479 16.2663C10.5604 17.5597 9.51656 18.5492 8.20957 18.767L6.10159 19.1184C4.45641 19.3926 2.87072 18.3769 2.43183 16.7678L2.22578 16.0124C1.72818 14.188 2.31138 12.0975 4.16042 11.1699C6.18942 10.1519 9.48668 8.99828 13.9999 8.99829C18.5131 8.9983 21.8103 10.152 23.8393 11.1699C25.6883 12.0975 26.2715 14.188 25.774 16.0123L25.5679 16.7678C25.129 18.3769 23.5433 19.3926 21.8981 19.1184L19.7902 18.767C18.4832 18.5492 17.4393 17.5597 17.1519 16.2663Z"
+                                        fill="red"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
