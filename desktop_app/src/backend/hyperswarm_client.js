@@ -53,6 +53,7 @@ class HyperswarmClient {
       console.log("* got a connection from:", name, "*");
       this.conns.push(conn);
       conn.once("close", () => this.conns.splice(this.conns.indexOf(conn), 1));
+      conn.on("error", (data) => console.error("Error:", data));
       conn.on("data", (data) => {
         console.log(`${name}: ${data}`);
         const message_data = JSON.parse(data);
