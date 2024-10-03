@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Enter or Create Organization</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #1a1a1a;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container {
+                background-color: #2c2c2c;
+                padding: 2rem;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                max-width: 400px;
+                width: 100%;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+                color: #8a8787;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            input[type="text"] {
+                padding: 10px;
+                font-size: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                margin-bottom: 1rem;
+                transition: border-color 0.2s ease;
+            }
+
+            input[type="text"]:focus {
+                outline: none;
+                border-color: #4a90e2;
+            }
+
+            button {
+                background-color: #4a90e2;
+                color: white;
+                border: none;
+                padding: 10px;
+                font-size: 1rem;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #357ab7;
+            }
+
+            .divider {
+                margin: 2rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .divider::before,
+            .divider::after {
+                content: "";
+                flex: 1;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .divider:not(:empty)::before {
+                margin-right: 0.5em;
+            }
+
+            .divider:not(:empty)::after {
+                margin-left: 0.5em;
+            }
+
+            .create-organization {
+                margin-top: 1rem;
+                font-size: 0.9rem;
+                color: #aba0a0;
+            }
+
+            .create-organization button {
+                background-color: #34c759;
+                padding: 10px;
+                margin-top: 0.5rem;
+            }
+
+            .create-organization button:hover {
+                background-color: #28a745;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Enter or Create Organization</h1>
+            <form id="topic-form">
+                <input
+                    type="text"
+                    id="topic-input"
+                    placeholder="Enter Topic Key"
+                />
+                <button type="submit">Submit</button>
+            </form>
+
+            <div class="divider">or</div>
+
+            <div class="create-organization">
+                <p>Don't have an organization? Create one:</p>
+                <button id="create-org">Create Organization</button>
+            </div>
+        </div>
+
+        <script>
+            const form = document.getElementById("topic-form");
+            const createOrgButton = document.getElementById("create-org");
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const topicKey = document.getElementById("topic-input").value;
+                window?.electronAPI?.sendTopic(topicKey);
+            });
+
+            createOrgButton.addEventListener("click", () => {
+                window?.electronAPI?.sendTopic("");
+            });
+        </script>
+    </body>
+</html>
